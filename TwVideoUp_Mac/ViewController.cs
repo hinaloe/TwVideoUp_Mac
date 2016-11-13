@@ -116,7 +116,7 @@ namespace TwVideoUp_Mac
                 new NSAlert {MessageText = "Error", InformativeText = "Media not selected"}.RunModal();
                 return;
             }
-            TweetWithField();
+            TweetWithField().ConfigureAwait(true);
         }
 
         [Export("logout:")]
