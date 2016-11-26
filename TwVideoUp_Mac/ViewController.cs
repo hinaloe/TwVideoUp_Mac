@@ -1,16 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Security.Permissions;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using AppKit;
 using AVFoundation;
-using AVKit;
 using CoreTweet;
 using Foundation;
 using TwVideoUp_Mac.Twitter;
-using static System.String;
 
 namespace TwVideoUp_Mac
 {
@@ -51,7 +46,7 @@ namespace TwVideoUp_Mac
             }
             else
             {
-				TokenStore.Tokens = Tokens.Create(Config.CONSUMER_KEY, Config.CONSUMER_SECRET,
+                TokenStore.Tokens = Tokens.Create(Config.CONSUMER_KEY, Config.CONSUMER_SECRET,
                     userDefaults.StringForKey(Config.CONFIG_TOKEN), userDefaults.StringForKey(Config.CONFIG_SECRET));
             }
         }
@@ -72,7 +67,10 @@ namespace TwVideoUp_Mac
                         // if token not have
                         if (userDefaults.StringForKey(Config.CONFIG_TOKEN) == null)
                         {
-                            var alert = NSAlert.WithMessage("アカウントの設定が出来ていません。", "Yes", "Cancel", null, "終了しますか？");
+                            var alert = new NSAlert {MessageText = "アカウントの設定が出来ていません。", InformativeText = "終了しますか？"};
+                            alert.AddButton("Yes").Tag = 1;
+                            alert.AddButton("No").Tag = 0;
+
                             var quit = alert.RunSheetModal(ac.View.Window);
                             if (quit != 0)
                             {
@@ -167,8 +165,15 @@ namespace TwVideoUp_Mac
             {
                 new NSAlert {MessageText = ex.Status.ToString(), InformativeText = ex.Message}.RunModal();
             }
+            catch (ParsingException ex)
+            {
+                Console.WriteLine(ex.Json);
+                Console.Error.WriteLine(ex);
+                new NSAlert {MessageText = "ParseError", InformativeText = ex.Message}.RunModal();
+            }
             catch (Exception ex)
             {
+                Console.Error.WriteLine(ex);
                 new NSAlert {MessageText = "Error", InformativeText = ex.Message}.RunModal();
             }
             finally

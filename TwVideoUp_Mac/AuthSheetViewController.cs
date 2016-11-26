@@ -20,7 +20,7 @@ namespace TwVideoUp_Mac
         public NSViewController Presentor { get; set; }
 
         public bool WillClose { get; set; } = true;
-		public bool WillQuit { get; set; } = false;
+        public bool WillQuit { get; set; } = false;
 
         #endregion
 
@@ -34,21 +34,21 @@ namespace TwVideoUp_Mac
 
             // Do any additional setup after loading the view.
             BrowseAuthorizeView();
-			authWebView.WillPerformClientRedirect += (sender, args) =>
-			{
-				Console.WriteLine(args.ToUrl.ToString());
-				if (args.ToUrl.AbsoluteString.StartsWith(Config.CALLBACK))
-				{
-				    Console.WriteLine(args.ToUrl.Query);
-				    var query = System.Web.HttpUtility.ParseQueryString(args.ToUrl.Query);
-				    GetTokens(query);
-				}
-			};
+            authWebView.WillPerformClientRedirect += (sender, args) =>
+            {
+                Console.WriteLine(args.ToUrl);
+                if (args.ToUrl.AbsoluteString.StartsWith(Config.CALLBACK))
+                {
+                    Console.WriteLine(args.ToUrl.Query);
+                    var query = System.Web.HttpUtility.ParseQueryString(args.ToUrl.Query);
+                    GetTokens(query);
+                }
+            };
         }
 
         private async void BrowseAuthorizeView()
         {
-			_session = await OAuth.AuthorizeAsync(Config.CONSUMER_KEY, Config.CONSUMER_SECRET, Config.CALLBACK);
+            _session = await OAuth.AuthorizeAsync(Config.CONSUMER_KEY, Config.CONSUMER_SECRET, Config.CALLBACK);
             authWebView.MainFrameUrl = _session.AuthorizeUri.AbsoluteUri;
         }
 
@@ -83,10 +83,10 @@ namespace TwVideoUp_Mac
             {
                 CloseSheet();
             }
-			if (WillQuit)
-			{
-				NSApplication.SharedApplication.Terminate(this);
-			}
+            if (WillQuit)
+            {
+                NSApplication.SharedApplication.Terminate(this);
+            }
         }
 
         partial void ReloadAuthView(NSObject sender)

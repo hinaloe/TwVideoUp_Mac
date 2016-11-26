@@ -2,7 +2,7 @@
 
 namespace TwVideoUp_Mac.Twitter
 {
-    public class TokenStore
+    public static class TokenStore
     {
         internal static Tokens Tokens { get; set; }
     }

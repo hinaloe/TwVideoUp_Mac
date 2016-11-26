@@ -1,6 +1,4 @@
 ﻿using AppKit;
-using Social;
-using Accounts;
 
 namespace TwVideoUp_Mac
 {
