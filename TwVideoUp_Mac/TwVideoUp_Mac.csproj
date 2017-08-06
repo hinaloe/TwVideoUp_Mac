@@ -8,9 +8,9 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TwVideoUp_Mac</RootNamespace>
     <AssemblyName>TwVideoUp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <UseXamMacFullFramework>true</UseXamMacFullFramework>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +31,14 @@
     <Profiling>true</Profiling>
     <PlatformTarget>x86</PlatformTarget>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <RunWithWarnings>true</RunWithWarnings>
+    <CodeSignProvision></CodeSignProvision>
+    <CodeSignExtraArgs></CodeSignExtraArgs>
+    <PackagingExtraArgs></PackagingExtraArgs>
+    <I18n></I18n>
+    <MonoBundlingExtraArgs></MonoBundlingExtraArgs>
+    <CodeSignResourceRules></CodeSignResourceRules>
+    <HttpClientHandler></HttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <Optimize>true</Optimize>
@@ -45,14 +53,17 @@
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
-    <LinkMode>None</LinkMode>
+    <LinkMode>SdkOnly</LinkMode>
     <PlatformTarget>x86</PlatformTarget>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
     <I18n>cjk</I18n>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.2-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="CoreTweet, Version=0.8.0.384, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CoreTweet.0.8.0.384\lib\net45\CoreTweet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,9 +71,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="CoreTweet">
-      <HintPath>..\packages\CoreTweet.0.7.2.352\lib\net45\CoreTweet.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
