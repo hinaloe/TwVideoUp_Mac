@@ -9,6 +9,13 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+strategy:
+  matrix:
+    Release:
+      buildConfiguration: Release
+    Debug:
+      buildConfiguration: Debug
+
 steps:
 # To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
 # configure this task with the *Mono* version that is associated with the
@@ -34,3 +41,17 @@ steps:
   inputs:
     solution: '**/*.sln'
     msbuildArchitecture: 'x64'
+    configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: $(Build.SourcesDirectory)/TwVideoUp/bin
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/dest'
+    CleanTargetFolder: true
+  condition: succeeded()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: TVUM-$(buildConfiguration)
