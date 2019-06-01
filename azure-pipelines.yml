@@ -28,5 +28,5 @@ steps:
   inputs:
     solutionFile: '**/*.sln'
     configuration: 'Release'
-    buildForSimulator: true
+    # buildForSimulator: true
     packageApp: false
