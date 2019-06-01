@@ -45,7 +45,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: $(Build.SourcesDirectory)/TwVideoUp/bin
+    SourceFolder: $(Build.SourcesDirectory)/TwVideoUp_Mac/bin
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/dest'
     CleanTargetFolder: true
